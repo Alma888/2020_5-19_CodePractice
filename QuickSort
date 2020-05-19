@@ -1,0 +1,62 @@
+# 2020_5-19_CodePractice
+
+public class QuickSort {
+
+    public static void main(String[] args) {
+        int[] a={5,9,8,4,7,3,6,2};
+        print(a);
+        sort(a,0,a.length-1);
+        print(a);
+
+    }
+
+    private static void print(int[] a) {
+        for(int i=0;i<a.length;i++){
+            System.out.print(a[i]+"");
+        }
+        System.out.println();
+    }
+
+    private static void sort(int[] a,int low,int high){
+        if(low>=high){
+            return;
+        }
+        if((high-low)==1){
+            if(a[0]>a[1]) {
+                swap(a, 0, 1);
+            }
+            return;
+        }
+        int pivot=a[low]; //基准值
+        int left=low+1;
+        int right=high;
+
+        while (left<right){
+            while (left<=right&&left<=high){
+                if(a[left]>pivot){
+                    break;
+                }
+                left++;
+            }
+            while (left<=right&&right>low){
+                if(a[right]<pivot){
+                    break;
+                }
+                right--;
+            }
+            if(left<right){
+                swap(a,right,left);
+            }
+        }
+        swap(a,low,right);  //交换第一次快排后的right位置的值 和 基准值
+        sort(a,low,right);  //排序基准值前的数组区间
+        sort(a,right+1,high);//排序基准值后的数组区间
+    }
+
+    private static void swap(int[] a, int i, int i1) {
+        int tmp=0;
+        tmp=a[i];
+        a[i]=a[i1];
+        a[i1]=tmp;
+    }
+}
